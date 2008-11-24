@@ -1,0 +1,9 @@
+#!/bin/bash
+## Simple notify script for Make
+## Usage: make;m-nofity
+if [ $1 = 0 ]; then
+	aplay -q /home/andywxy/Desktop/Sound/Dream/success.wav > /dev/null
+else
+	aplay -q /home/andywxy/Desktop/Sound/Dream/error\ 2.wav > /dev/null
+fi
+

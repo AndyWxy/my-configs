@@ -1,0 +1,2 @@
+sudo ucimf_keyboard
+LC_CTYPE=zh_CN.UTF-8 fbterm 2>/dev/null

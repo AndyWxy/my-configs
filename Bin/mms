@@ -1,0 +1,39 @@
+#!/bin/bash
+
+list="/home/andywxy/channel_list"
+#list="/tmp/channel_list"
+tmp="/tmp/channel_list"
+
+
+aline=0
+function make_array() {
+	sed -n '/------/p' "$list" > "$tmp"
+	exec 3<> "$tmp"
+	while read line <&3
+	do
+		((++aline))
+		name["$aline"]="${line##*------}"
+		url["$aline"]="${line%%------*}"
+	done	
+}
+
+
+[ -e "$list" ] || {
+	echo "找不到频道列表文件: $list"
+	exit 0
+}
+
+make_array
+while :
+do
+	[ "$aline" -ne 0 ] && printf "%5s   %s\n" "ID" "频道名称"
+	for(( i=1; i<="$aline"; ++i ))
+	do
+		printf "%5s   %s\n" "$i" ${name["$i"]}
+	done
+	printf "输入一个频道ID( q 退出 )："
+	read id
+	[ "$id" == "q" ] && exit 0
+	mplayer "${url[$id]}"
+	wait
+done

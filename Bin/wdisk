@@ -1,0 +1,6 @@
+#!/bin/bash
+while :
+do
+        echo a > /tmp/.wdisk
+        sleep 5
+done  
