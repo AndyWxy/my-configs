@@ -172,6 +172,13 @@ function preexec {
 ## ====================
 
 ## --------------------
+##     for Github
+## --------------------
+alias ga='git add'
+alias gcm='git comment -m' # 'comment content ' should be followed
+alias gp='git push origin master'
+
+## --------------------
 ## Ordinary cli command
 ## --------------------
 alias so='source ~/.zshrc'
