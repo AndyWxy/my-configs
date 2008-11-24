@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+# /etc/rc.local: Local multi-user startup script.
+#
+# Laptop tweak - for wireless card power consuming
+/usr/sbin/iwpriv eth1 set_power 5
+
+# Hard drive spin down problem 
+#hdparm -B 254 /dev/sda &
+/home/andywxy/bin/wdisk & 
+/etc/pm/sleep.d/50-hdparm_pm 
+
+#ThinkPad light usage permission
+/bin/chmod 666 /proc/acpi/ibm/light
+
+#Use ntpd to rsync localtime
+ntpd -s
+
+# Restart acpid 
+#xhost local:root
+#/etc/rc.d/acpid restart
+
