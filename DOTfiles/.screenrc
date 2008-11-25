@@ -1,144 +1,37 @@
-# Autolock
-# idle 60 lockscreen
+# make Shift + PgUp/Dn working in urxvt
+ termcapinfo xterm*|Eterm|mlterm|rxvt|gnome-terminal|fbterm 'hs:ts=\E]0;:fs=\007:ds=\E]0;screen\007'
 
-# Override Title
-#shelltitle "andy"
-
-# UTF-8 By Default
- defutf8 on
-# utf8 on on
-
-# Diable the log inform
-startup_message off
-
-# detach on hangup
- autodetach on
-
-# emulate .logout message
- pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
-
-# erase background with current bg color
-# defbce off
-# bce off
-
-# disable Ctrl-S/Ctrl-Q "flow control"
-# defflow on
-
-# Addtional keybinding
- escape ``
- bind > writebuf
- bind K kill
- bind w windowlist
- bind s split
- bind j focus up
- bind k focus down
- bind m monitor
- bind M silence
- bind a other
- bind g vbell
- bind T title
- bind t time
- bind C clear
- bind Z reset
- bind Q quit
- bind q only
- bind r remove
- bind + resize +3
- bind = resize -3
- bind v screen -t vim
- bind c screen 
- bind 0 select 10                                                            
- 
-# restore window contents after using (e.g.) vi
- altscreen on
- 
-# Scrollback lines
- defscrollback 10000
-
-# Terms settings
-terminfo rxvt* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
-#  terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+# Fix screen has no 256 colors in rxvt-unicode|*term
  term screen-256color
  termcapinfo xterm*|Eterm|mlterm|rxvt|fbterm 'hs:ts=\E]0;:fs=\007:ds=\E]0;screen\007'
-# termcap  xterm hs@:cs=\E[%i%d;%dr:im=\E[4h:ei=\E[4l
-# terminfo xterm hs@:cs=\E[%i%p1%d;%p2%dr:im=\E[4h:ei=\E[4l
-# terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+ terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+ term screen
+ startup_message off
+ encoding GBK UTF-8
+ defutf8 on
+ utf8 on
 
-# Statusbar
-# COLOR:  colors codes are combinations of
-# # [attribute modifier] [color description]
-# # the manual talks of "attribute/color modifiers".
-# # see the manual, section "STRING ESCAPES".
-# #
-# # Color table:
-# # 0 Black             .    leave color unchanged
-# # 1 Red               b    blue
-# # 2 Green             c    cyan
-# # 3 Brown / yellow    d    default color
-# # 4 Blue              g    green           b    bold
-# # 5 Purple            k    blacK           B    blinking
-# # 6 Cyan              m    magenta         d    dim
-# # 7 White             r    red             r    reverse
-# # 8 unused/illegal    w    white           s    standout
-# # 9 transparent       y    yellow          u    underline
+# Key Binding
+# Toggle 'fullscreen' or not.（f：hide hardstatus，F unhide）
+#
+ bind f eval "caption splitonly" "hardstatus ignore"
+# bind f eval "caption always"    "hardstatus ignore"
+ bind F eval "caption splitonly"   "hardstatus alwayslastline"
 
-## Show Time/Date only
-# hardstatus alwayslastline "%{=b}%{-b}%{R}[%{=b B}%-w%{=b BK}%>%n %t%{-}%+w%{-b}%< %=%{R}][%{-b}%{M}%m-%d %D %{G}%c%{R}]"
-
-#hacktick 1 60 60 $HOME/bin/get_battery  # battery_screen.sh contains 1 line: acpi | awk -F ', ' '{print $2}'
-#hardstatus string '%{= kG}%-Lw%{= kW}%50> %n*%f %t%{= kG}%+Lw%< %{= kG}%-=%D %m/%d/%y | %C:%s %A | %5{-}'
-
-#backtick 1 60 60 $HOME/bin/get_uptime
-#backtick 2 60 60 $HOME/bin/get_cputemp Core0
-#backtick 3 60 60 $HOME/bin/get_freemem
-#backtick 4 60 60 $HOME/bin/get_freeswap
-#backtick 5 60 60 $HOME/bin/get_volume PCM
-#backtick 6 60 60 $HOME/bin/get_gmail
-backtick 7 60 60 $HOME/bin/get_updates
-
-## Show Update/Time - fit for ucimf
-#hardstatus alwayslastline "%{=b}%{-b}%{R}[%{=b B}%-w%{=b BK}%>%n %t%{-}%+w%{-b}%< %=%{R}][%{-b}%{M}New(%7`) %{G}%c%{R}]"
-
-## Show Update/Bat/Time - fit for ucimf
-#hardstatus alwayslastline "%{=b}%{-b}%{R}[%{=b B}%-w%{=b BK}%>%n %t%{-}%+w%{-b}%< %=%{R}][%{-b}%{M}New(%7`) %{G}Bat(%1`) %c%{R}]"
-
-## Show Update/Bat - fit for awesome3/ob
-#hardstatus alwayslastline "%{=b}%{-b}%{R}[%{=b B}%-w%{=b BK}%>%n %t%{-}%+w%{-b}%< %=%{R}][%{-b}%{M}New(%7`) %{G}Bat(%1`)%{R}]"
-
-## Show Update - fit for awesome3/ob
-hardstatus alwayslastline "%{=b}%{-b}%{R}[%{=b B}%-w%{=b BK}%>%n %t%{-}%+w%{-b}%< %=%{R}][%{-b}%{M}%7` %{G}Updates%{R}]"
-
-#hardstatus string "%{.kc}%-w%{.kw}%n*%t%{-}%+w %= | %1` | %2`C | %3`/%4` | %5`% | %6`/%7` | %c %d/%m/%Y"
-
-#backtick 10 1 60 "whoami"
-#backtick 20 1 300 "arch_update.py"
-
-#shelltitle "$ | zsh"
-#[randy@voodoo] updates :: none                        1 irssi  [2 vim .screenrc]
-#hardstatus alwayslastline "%{= dd}[%10%H] updates :: %20=%-w[%n %t]%+w" 
-
-# change window with ALT-. ALT-,
-# bindkey "^[," prev
-# bindkey "^[." next
-
-# use C-f to turn the status bar off at the bottom of the screen
- bind f hardstatus alwaysignore
-# # use F9 to turn the status bar on the bottom back on
- bind F hardstatus alwayslastline
-# F1 and F2 to move one screen forward or backward
-# bindkey -k k1 prev
-# bindkey -k k2 next
-
-# Bell settings
- vbell_msg "Hey!"
- vbellwait 2
- activity "%c activity -> %n%f %t"
- bell "%c bell -> %n%f %t^G"
-
- bind + resize +3
- bind = resize -3
-
- bind v screen -t vim
+# Quick
+ escape `` # change C-A to `
+ bind s split # Split window
+ bind - resize -5 # Decrease window region by 5
+ bind = resize +5 # Increase window region by 5
+ bind q only 
+ bind Q quit # exit screen and kill all screen tabs
+ bind t title # Window title
+ bind T title # Window title
+ bind w windowlist -b # diskplay screen list for chosen
+ bind j focus down # Switch to window below
+ bind k focus up # Switch to window above
+ bind K kill # kill current screen tab
+ bind r remove
 # binding the F1 - F8 keys to the first 8 screens, F11 = previous | F12 = next
  bindkey -k k1 select 1
  bindkey -k k2 select 2
@@ -165,28 +58,107 @@ hardstatus alwayslastline "%{=b}%{-b}%{R}[%{=b B}%-w%{=b BK}%>%n %t%{-}%+w%{-b}%
  bind  * select 18
  bind  ( select 19
 
-# Make shift-PgUp and shift-PgDn work like they do in xterm.  (Note that this
-# requires xterm to be configured to pass those keys through, and not try to
-# act on them itself.)
+# Statusbar
+# COLOR:  colors codes are combinations of
+# # [attribute modifier] [color description]
+# # the manual talks of "attribute/color modifiers".
+# # see the manual, section "STRING ESCAPES".
+# #
+# # Color table:
+# # 0 Black             .    leave color unchanged
+# # 1 Red               b    blue
+# # 2 Green             c    cyan
+# # 3 Brown / yellow    d    default color
+# # 4 Blue              g    green           b    bold
+# # 5 Purple            k    blacK           B    blinking
+# # 6 Cyan              m    magenta         d    dim
+# # 7 White             r    red             r    reverse
+# # 8 unused/illegal    w    white           s    standout
+# # 9 transparent       y    yellow          u    underline
+
+# Show Time/Date only
+ # hardstatus alwayslastline "%{=b}%{-b}%{R}[%{=b B}%-w%{=b BK}%>%n %t%{-}%+w%{-b}%< %=%{R}][%{-b}%{M}%m-%d %D %{G}%c%{R}]"
+
+ #hacktick 1 60 60 $HOME/bin/get_battery  # battery_screen.sh contains 1 line: acpi | awk -F ', ' '{print $2}'
+ #hardstatus string '%{= kG}%-Lw%{= kW}%50> %n*%f %t%{= kG}%+Lw%< %{= kG}%-=%D %m/%d/%y | %C:%s %A | %5{-}'
+
+ #backtick 1 60 60 $HOME/bin/get_uptime
+ #backtick 2 60 60 $HOME/bin/get_cputemp Core0
+ #backtick 3 60 60 $HOME/bin/get_freemem
+ #backtick 4 60 60 $HOME/bin/get_freeswap
+ #backtick 5 60 60 $HOME/bin/get_volume PCM
+ #backtick 6 60 60 $HOME/bin/get_gmail
+ backtick 7 60 60 $HOME/bin/get_updates
+
+ ## Show Update/Time - fit for ucimf
+ #hardstatus alwayslastline "%{=b}%{-b}%{R}[%{=b B}%-w%{=b BK}%>%n %t%{-}%+w%{-b}%< %=%{R}][%{-b}%{M}New(%7`) %{G}%c%{R}]"
+
+ ## Show Update/Bat/Time - fit for ucimf
+ #hardstatus alwayslastline "%{=b}%{-b}%{R}[%{=b B}%-w%{=b BK}%>%n %t%{-}%+w%{-b}%< %=%{R}][%{-b}%{M}New(%7`) %{G}Bat(%1`) %c%{R}]"
+
+ ## Show Update/Bat - fit for awesome3/ob
+ #hardstatus alwayslastline "%{=b}%{-b}%{R}[%{=b B}%-w%{=b BK}%>%n %t%{-}%+w%{-b}%< %=%{R}][%{-b}%{M}New(%7`) %{G}Bat(%1`)%{R}]"
+
+ ## Show Update - fit for awesome3/ob
+ hardstatus alwayslastline "%{=b}%{-b}%{R}[%{=b B}%-w%{=b BK}%>%n %t%{-}%+w%{-b}%< %=%{R}][%{-b}%{M}%7` %{G}Updates%{R}]"
+
+ #hardstatus string "%{.kc}%-w%{.kw}%n*%t%{-}%+w %= | %1` | %2`C | %3`/%4` | %5`% | %6`/%7` | %c %d/%m/%Y"
+
+ #backtick 10 1 60 "whoami"
+ #backtick 20 1 300 "arch_update.py"
+
+ #shelltitle "$ | zsh"
+ #[randy@voodoo] updates :: none                        1 irssi  [2 vim .screenrc]
+ #hardstatus alwayslastline "%{= dd}[%10%H] updates :: %20=%-w[%n %t]%+w" 
+
+
+ # caption 和 hardstatus 的显示
+ #caption always "%{=b}%{-b}%{R}[%{=b B}%-w%{=b BK}%>%n %t%{-}%+w%{-b}%< %=%{R}][%{-b}%{M}%m-%d %D %{G}%c%{R}]"
+ 
+# hardstatus alwayslastline "%{=b}%{-b}%{R}[%{=b B}%-w%{=b BK}%>%n %t%{-}%+w%{-b}%< %=%{R}][%{-b}%{M}%m-%d %D %{G}%c%{R}]"
+
+ #hardstatus string '%{= kK}%{w}%H %{K}%= %{= kw}%?%-Lw%?%{B}(%{W}%n*%f %t%?(%u)%?%{B})%{w}%?%+Lw%?%?%= %{K}%{B} %{w}%c%{K}'
+ 
+ #hardstatus alwayslastline '%{= G} %l %=%{= w}%-w%{+b r}%n*%t%{-b r}%{w}%+w%= %{c}%d %D %{B}%c '
+
+# Others
+ deflogin off
+ autodetach on #Allow tach prev screen，use screen -r/R
+ defscrollback 10000 # How may lines should screen keep holding
+ nonblock on
+ attrcolor b ".I"
+ defbce "on"
+ activity "%c activity -> %n%f %t"
+ bell "%c bell -> %n%f %t^G" #Format C-A M notifications
+ vbell_msg " *beep* "
+ altscreen on
+
+ # Make shift-PgUp and shift-PgDn work like they do in xterm.  (Note that this
+ # requires xterm to be configured to pass those keys through, and not try to
+ # act on them itself.)
+
  bindkey "^[[5;2~" eval "copy" "stuff ^u"
  bindkey -m "^[[5;2~" stuff ^u
  bindkey -m "^[[6;2~" stuff ^d
 
 # Startup screen windows
-# screen -t Zsh 1 zsh
-# screen -t Sdcv     1   sdcv
- screen -t Alpine    1   alpine
-# screen -t Newsbeuter   3   newsbeuter
- screen -t W3M       2   w3m bbs.archlinux.org
- screen -t Mpd       3   ncmpcpp
- screen -t Mitter       4   mitter -i cmd
- screen -t Jamedo	5  jamedo
-# screen -t DH        6 ssh andywxy@blog.andywxy.cn
- screen -t MMS      6 mms
-# screen -t Zsh 		8   zsh
+ #screen -t Zsh 0
+ #screen -t log 1 tail -f /var/log/lighttpd/access.log
+ #screen -t Irssi 1 irssi
+ screen -t Alpine 1 alpine
+ #screen -t Newsbeuter 3 newsbeuter
+ screen -t W3M 2 w3m bbs.archlinux.org
+ #screen -t Mpd 5 ncmpc
+ #screen -t Lyric 5 ./lrcshow cli
+ #screen -t Mitter 6 mitter -i cmd
+ screen -t Jamedo 3 jamedo
+ screen -t MMS 4 mms
+ #screen -t Radio 6 sh 	/home/andywxy/scripts/hiChannel.sh
+ #select 0  
+
+# Start from screen 1 not screen 0
  bind c screen 1
  bind 0 select 10                                                            
 # screen 1
- select 1
-
+  select 1
  
