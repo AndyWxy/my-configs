@@ -5,7 +5,7 @@
 #
 # Static Config Variables
 #
-ADMIN="andy.bio@gmail.com"       # email to recieve alerts
+ADMIN="abc@abc.com"       # email to recieve alerts
 ALERT=20                        # free space percentage to trigger an alert
 
 #
