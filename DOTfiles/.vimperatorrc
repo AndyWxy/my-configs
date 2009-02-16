@@ -1,0 +1,56 @@
+" 1.2pre (created: 2008/07/17 04:11:56)
+" Mappings
+" restart Vimperator
+map <C-r> :restart<CR>
+" select next/previous tab
+map <Right> gt
+map <Left> gT
+map <C-l> gt
+map <C-h> gT
+" move current tab left/right
+map <S-Right> :tabmove! +1<CR>
+map <S-Left> :tabmove! -1<CR>
+map <C-L> :tabmove! +1<CR>
+map <C-H> :tabmove! -1<CR>
+
+" Options
+set guioptions+=b
+set titlestring=Andy's Littlefox
+set history=0
+set focuscontent
+set showtabline=0
+set maxhints=1000
+set preload
+set showmode
+set showstatuslinks
+
+" Set editor
+set editor=urxvt -pt Root -e vim
+
+" Abbreviations
+cabbrev /. http://www.slashdot.org
+cabbrev tn tabnew
+cabbrev to tabopen
+cabbrev gv http://video.google.com
+cabbrev yt http://www.youtube.com
+cabbrev tg tabopen goosh
+cabbrev gi http://images.google.com
+
+ca answers tabnew\nhttp://www.answers.com
+
+
+" Sites disabled vimperator 
+:autocmd LocationChange .* :js modes.passAllKeys = /mail\.google\.com/.test(buffer.URL)
+
+" Show me the feed icon in statusbar
+javascript <<EOF
+(function(){
+    var feedPanel = document.createElement("statusbarpanel");
+    feedPanel.setAttribute("id", "feed-panel-clone");
+    feedPanel.appendChild(document.getElementById("feed-button"));
+    feedPanel.firstChild.setAttribute("style", "padding: 0; max-height: 16px;");
+    document.getElementById("status-bar")
+            .insertBefore(feedPanel, document.getElementById("security-button"));
+})();
+EOF
+
